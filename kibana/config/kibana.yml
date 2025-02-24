@@ -4,7 +4,7 @@
 #
 server.name: kibana
 server.host: 0.0.0.0
-elasticsearch.hosts: [ http://elasticsearch:9200 ]
+elasticsearch.hosts: [http://elasticsearch:9200]
 
 monitoring.ui.container.elasticsearch.enabled: true
 monitoring.ui.container.logstash.enabled: true
@@ -27,16 +27,20 @@ elasticsearch.password: ${KIBANA_SYSTEM_PASSWORD}
 #xpack.encryptedSavedObjects.encryptionKey:
 #xpack.reporting.encryptionKey:
 
+## Telemetry settings
+telemetry.enabled: true
+telemetry.optIn: true
+
 ## Fleet
 ## https://www.elastic.co/guide/en/kibana/current/fleet-settings-kb.html
 #
-xpack.fleet.agents.fleet_server.hosts: [ http://fleet-server:8220 ]
+xpack.fleet.agents.fleet_server.hosts: [http://fleet-server:8220]
 
 xpack.fleet.outputs:
   - id: fleet-default-output
     name: default
     type: elasticsearch
-    hosts: [ http://elasticsearch:9200 ]
+    hosts: [http://elasticsearch:9200]
     is_default: true
     is_default_monitoring: true
 
@@ -97,3 +101,5 @@ xpack.fleet.agentPolicies:
                 value: 0.0.0.0:8200
               - name: url
                 value: http://apm-server:8200
+#memo
+# curl -u elastic:changeme -X GET "http://localhost:9200/_cluster/health?pretty" これを打つとelasticsearchの情報が見れる
