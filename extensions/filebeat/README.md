@@ -40,3 +40,40 @@ container: [Run Filebeat on Docker][filebeat-docker].
 [filebeat-doc]: https://www.elastic.co/guide/en/beats/filebeat/current/index.html
 
 [setup]: ../../README.md#how-to-re-execute-the-setup
+
+
+# Filebeat
+
+Filebeatは、ログデータを転送および集中管理するための軽量なシッパーです。サーバーにエージェントとしてインストールされ、指定したログファイルまたは場所を監視し、ログイベントを収集して、インデックス作成のためにElasticsearchまたはLogstashに転送します。
+
+## 使用方法
+
+**この拡張機能では、`filebeat_internal`および`beats_system`ユーザーが作成され、パスワードで初期化されている必要があります。** スタックの初期起動時にこれらを実行していない場合は、[セットアップの再実行方法][setup]を参照してセットアップコンテナを再度実行し、これらのユーザーを初期化してください。
+
+スタックにFilebeatを含めるには、リポジトリのルートからDocker Composeを、`filebeat-compose.yml`ファイルを参照する追加のコマンドライン引数を付けて実行します。
+
+```console
+$ docker compose -f docker-compose.yml -f extensions/filebeat/filebeat-compose.yml up
+```
+
+## Filebeatの設定
+
+Filebeatの設定は、[`config/filebeat.yml`](./config/filebeat.yml)に保存されています。[設定リファレンス][filebeat-config]を参照して、このファイルを修正できます。
+
+Filebeatの設定を変更した場合は、Filebeatコンテナの再起動が必要です。
+
+```console
+$ docker compose -f docker-compose.yml -f extensions/filebeat/filebeat-compose.yml restart filebeat
+```
+
+Dockerコンテナ内でFilebeatを設定する方法の詳細については、次のドキュメントページを参照してください：[DockerでFilebeatを実行][filebeat-docker]。
+
+## 関連情報
+
+[Filebeatドキュメント][filebeat-doc]
+
+[filebeat-config]: [https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-reference-yml.html](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-reference-yml.html)
+[filebeat-docker]: [https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html](https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html)
+[filebeat-doc]: [https://www.elastic.co/guide/en/beats/filebeat/current/index.html](https://www.elastic.co/guide/en/beats/filebeat/current/index.html)
+
+[setup]: ../../README.md#how-to-re-execute-the-setup

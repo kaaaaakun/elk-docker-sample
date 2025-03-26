@@ -37,6 +37,9 @@ docker compose up setup
 ```sh
 docker compose up
 ```
+```sh
+curl -s http://localhost:9200 -u elastic:changeme
+```
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/6f67cbc0-ddee-44bf-8f4d-7fd2d70f5217">
